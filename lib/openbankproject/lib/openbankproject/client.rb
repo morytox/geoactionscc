@@ -10,10 +10,30 @@ module OpenBankProject
       flatten_transaction_roots(get_transactions[:transactions])
     end
 
+    def transaction(id, metadata: [])
+      get_transaction(id)[:transaction].tap do |transaction|
+        metadata.each do |type|
+          transaction[type] = get_transaction_metadata(id, type)
+        end
+      end
+    end
+
     private
 
+    def get_transaction(id)
+      get_and_parse("#{@uri}/transactions/#{id}/transaction")
+    end
+
     def get_transactions
-      JSON.parse(RestClient.get("#{@uri}/transactions"), symbolize_names: true)
+      get_and_parse("#{@uri}/transactions")
+    end
+
+    def get_transaction_metadata(id, type)
+      get_and_parse("#{@uri}/transactions/#{id}/metadata/#{type}")
+    end
+
+    def get_and_parse(url)
+      JSON.parse(RestClient.get(url), symbolize_names: true)
     end
 
     def flatten_transaction_roots(transactions)

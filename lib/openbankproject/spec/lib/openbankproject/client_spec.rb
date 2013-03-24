@@ -23,6 +23,43 @@ describe OpenBankProject::Client do
       subject.transactions.last[:details][:type].should == "credit card"
     end
   end
+
+  describe "#transaction" do
+    let(:transaction) { JSON.parse(transactions_json, symbolize_names: true)[:transactions].first }
+    before do
+      RestClient.should_receive(:get)
+            .any_number_of_times
+            .with(OpenBankProject::API_ROOT + "/banks/mybank/accounts/myaccount/public/transactions/123abc/transaction")
+            .and_return(transaction.to_json)
+    end
+
+    it "returns a single transaction" do
+      subject.transaction("123abc").should == transaction[:transaction]
+    end
+
+    context "when requesting where metadata" do
+      before do
+        RestClient.should_receive(:get)
+              .with(OpenBankProject::API_ROOT + "/banks/mybank/accounts/myaccount/public/transactions/123abc/metadata/where")
+              .and_return(where_metadata_json)
+      end
+
+      it "adds it to the transaction" do
+        subject.transaction("123abc", metadata: [:where])[:where].should == JSON.parse(where_metadata_json, symbolize_names: true)
+      end
+    end
+  end
+end
+
+def where_metadata_json
+  <<-WHERE
+{
+    "where": {
+            "latitude": 37.423021,
+            "longitude": -122.083739
+    }
+}
+  WHERE
 end
 
 def transactions_json

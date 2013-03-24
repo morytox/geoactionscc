@@ -5,6 +5,7 @@
 				<tr>
 					<th>Date</th>
 					<th>UUID</th>
+					<th>Payer</th>
 					<th>Payee</th>
 				</tr>				
 			</thead>
@@ -12,7 +13,8 @@
 				<% @transactions.each do |transaction| %>
 					<tr>
 						<td><%= transaction.details[:posted] %></td>
-						<td><%= transaction.uuid %></td>
+						<td><a href="<%= transaction_path(transaction.bank_id) %>"><%= transaction.uuid %></a></td>
+						<td><%= transaction.this_account[:holder].first[:name] %></td>
 						<td><%= transaction.other_account[:holder][:name] %></td>
 					</tr>
 				<% end %>
