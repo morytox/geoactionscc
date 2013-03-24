@@ -1,1 +1,3 @@
 === This is an example for OpenBankProject
+
+This require Ruby v2.0
