@@ -6,6 +6,10 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'rspec-rails'
+gem 'twitter-bootstrap-rails'
+
+gem 'openbankproject', path: "lib/openbankproject"
 
 
 # Gems used only for assets and not required

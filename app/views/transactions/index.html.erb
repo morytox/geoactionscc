@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="span12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>UUID</th>
+					<th>Payee</th>
+				</tr>				
+			</thead>
+			<tbody>
+				<% @transactions.each do |transaction| %>
+					<tr>
+						<td><%= transaction.details[:posted] %></td>
+						<td><%= transaction.uuid %></td>
+						<td><%= transaction.other_account[:holder][:name] %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
