@@ -3,14 +3,15 @@ module OpenBankProject
 
   class Client
     def initialize(bank="", account="")
-      @uri = "#{API_ROOT}/banks/#{bank}/accounts/#{account}/public"
+      #@uri = "#{API_ROOT}/banks/#{bank}/accounts/#{account}/public"
+      @uri = "#{API_ROOT}/banks/postbank/accounts/tesobe/public"
     end
 
     def transactions
       flatten_transaction_roots(get_transactions[:transactions])
     end
 
-    def transaction(id, metadata=[])
+    def transaction(id, metadata=[] )
       get_transaction(id)[:transaction].tap do |transaction|
         metadata.each do |type|
           transaction[type] = get_transaction_metadata(id, type)
