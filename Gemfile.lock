@@ -36,6 +36,7 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.4)
+    cloudcontrol-rails (0.0.6)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -60,6 +61,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.21)
     multi_json (1.7.2)
+    pg (0.15.1)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -128,9 +130,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cloudcontrol-rails
   coffee-rails (~> 3.2.1)
   jquery-rails
+  json
   openbankproject!
+  pg
   rails (= 3.2.13)
   rspec-rails
   sass-rails (~> 3.2.3)
