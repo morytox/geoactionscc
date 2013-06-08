@@ -1,3 +1,5 @@
 === This is an example for OpenBankProject
 
 This requires Ruby v2.0 to run.
+
+License is Apache v2
